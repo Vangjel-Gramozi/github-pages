@@ -1,25 +1,34 @@
 import {Link, useParams} from "react-router-dom";
-
-const STORIES: Record<string, { title: string; chapters: string[] }> = {
-    "island-challenge": { title: "Island Challenge", chapters: ["chapter-1"] },
-    "story-2": { title: "Story 2", chapters: ["chapter-1"] },
-};
+import {useStories} from "../context/StoriesProvider.tsx";
 
 export default function Story() {
     const {storyId} = useParams<{ storyId: string }>();
-    const story = storyId ? STORIES[storyId] : undefined;
+
+    const stories = useStories();
+    if (!stories.stories || stories.stories.length === 0) return <div>Loading stories...</div>;
+    console.log(stories);
+    const story = storyId
+        ? stories.stories.find(s => Object.keys(s)[0] === storyId)
+        : undefined;
+
+    console.log(story);
+
     if (!story) return <div>Story not found</div>;
 
     return (
         <div>
-            <h2>{story.title}</h2>
-            <ul>
-                {story.chapters.map(ch => (
-                    <li key={ch}>
-                        <Link to={`/stories/${storyId}/${ch}`}>{ch.replace("-", " ")}</Link>
-                    </li>
-                ))}
-            </ul>
+            {Object.entries(story).map(([storyName, chapters]) => (
+                <div key={storyName}>
+                    <h3>{storyName}</h3>
+                    <ul>
+                        {chapters.map(ch => (
+                            <div key={ch}>
+                                <Link key={ch} to={`/stories/${storyName}/${ch}`}>{ch}</Link>
+                            </div>
+                        ))}
+                    </ul>
+                </div>
+            ))}
         </div>
     );
 }

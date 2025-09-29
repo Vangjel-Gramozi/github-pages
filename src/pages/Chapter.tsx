@@ -9,7 +9,7 @@ export default function Chapter() {
 
     useEffect(() => {
         const base = import.meta.env.BASE_URL || "/";
-        const path = `${base}content/${storyId}/${chapterId}.md`;
+        const path = `${base}content/stories/${storyId}/${chapterId}.md`;
         fetch(path)
             .then(res => {
                 if (!res.ok) throw new Error("Not found");
