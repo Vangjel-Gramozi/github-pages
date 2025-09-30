@@ -7,11 +7,11 @@ export interface StoriesIndex {
 }
 
 export function getChaptersForStory(stories: StoriesIndex, storyId: string): string[] {
-    const [folder, storyName] = storyId.split("/");
-    const folderStories = stories[folder];
-    if (!folderStories) return [];
-    const storyObj = folderStories.find(obj => storyName in obj);
-    return storyObj ? storyObj[storyName] : [];
+    const story = stories.stories.find(s => Object.keys(s)[0] === storyId);
+    if (!story) {
+        return [];
+    }
+    return story[storyId];
 }
 
 export function storyExists(stories: StoriesIndex, storyId: string): boolean {
