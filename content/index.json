@@ -2,9 +2,10 @@
   "stories": [
     {
       "story-1": [
-        "a",
         "b",
-        "blabli"
+        "blabli",
+        "final",
+        "one"
       ]
     },
     {
