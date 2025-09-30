@@ -1,16 +1,21 @@
-import {StrictMode} from 'react'
-import {createRoot} from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
-import {HashRouter} from "react-router-dom"
-import {StoriesProvider} from "./context/StoriesProvider.tsx";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { HashRouter } from "react-router-dom";
 
-createRoot(document.getElementById('root')!).render(
-    <StrictMode>
+import App from "./App.tsx";
+import { Provider } from "./provider.tsx";
+
+import "@/styles/globals.css";
+import { StoriesProvider } from "@/context/StoriesProvider.tsx";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <HashRouter>
+      <Provider>
         <StoriesProvider>
-            <HashRouter>
-                <App/>
-            </HashRouter>
+          <App />
         </StoriesProvider>
-    </StrictMode>,
-)
+      </Provider>
+    </HashRouter>
+  </React.StrictMode>,
+);
