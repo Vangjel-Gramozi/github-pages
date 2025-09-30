@@ -3,15 +3,7 @@ import * as path from "path";
 
 const contentBase = path.join(process.cwd(), "public/content");
 
-interface StoryEntry {
-    [storyName: string]: string[];
-}
-
-interface StoriesIndex {
-    [folderName: string]: StoryEntry[];
-}
-
-const storiesIndex: StoriesIndex = {};
+const storiesIndex = {};
 
 // Read all folders in contentBase dynamically
 const contentFolders = fs.readdirSync(contentBase, { withFileTypes: true })
@@ -20,7 +12,7 @@ const contentFolders = fs.readdirSync(contentBase, { withFileTypes: true })
 
 contentFolders.forEach(folder => {
     const folderPath = path.join(contentBase, folder);
-    const folderArray: StoryEntry[] = [];
+    const folderArray = [];
 
     const storyDirs = fs.readdirSync(folderPath, { withFileTypes: true })
         .filter(dirent => dirent.isDirectory());
