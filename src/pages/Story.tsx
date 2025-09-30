@@ -19,7 +19,6 @@ export default function Story() {
     <div>
       {Object.entries(story).map(([storyName, chapters]) => (
         <div key={storyName}>
-          <h3>{storyName}</h3>
           <ul>
             {chapters.map((ch) => (
               <div key={ch}>

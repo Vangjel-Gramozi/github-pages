@@ -2,6 +2,7 @@
   "name": "github-pages",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://vangjel-gramozi.github.io/github-pages/",
   "type": "module",
   "scripts": {
     "build-stories": "npx ts-node scripts/buildStoriesIndex.ts",
