@@ -6,6 +6,7 @@ import { Stories } from "@/pages/Stories.tsx";
 import Story from "@/pages/Story.tsx";
 import Chapter from "@/pages/Chapter.tsx";
 import DefaultLayout from "@/layouts/default.tsx";
+import { NotFound } from "@/pages/NotFound.tsx";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route element={<div>Author&#39;s more</div>} path="/author" />
         <Route element={<div>FAQ</div>} path="/faq" />
         <Route element={<div>Donate</div>} path="/donate" />
+        <Route element={<NotFound />} path="*" />
       </Route>
     </Routes>
   );

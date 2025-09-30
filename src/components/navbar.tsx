@@ -12,7 +12,7 @@ import {
 } from "@heroui/navbar";
 import { link as linkStyles } from "@heroui/theme";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
@@ -20,9 +20,24 @@ import { Logo, SearchIcon } from "@/components/icons";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        searchRef.current?.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const searchInput = (
     <Input
+      ref={searchRef}
       aria-label="Search"
       classNames={{
         inputWrapper: "bg-default-100",
